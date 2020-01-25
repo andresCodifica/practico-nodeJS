@@ -1,22 +1,24 @@
 const express = require('express');
-
 const response = require('../../../network/response')
 const Controller = require('./index')
 
 const router = express.Router();
 
-router.get('/',function (req,res){
+router.get('/',list)
+router.get('/:id',get)
+router.post('/',upsert)
+
+function list (req,res){
     Controller.list()
         .then((lista)=>{
             //res.send('Todo funciona')
             response.success(req,res,lista,200)
         }).catch((err)=>{
             response.error(req,res,err.message,500)
-        })
-    
-})
+        })    
+}
 
-router.get('/:id',function (req,res){
+function get (req,res){
     Controller.get(req.params.id)
         .then((user)=>{
         //res.send('Todo funciona')
@@ -25,18 +27,19 @@ router.get('/:id',function (req,res){
             response.error(req,res,err.message,500)
         })
     
-})
-router.post('/:id/:name',function (req,res){
-    let data = {
-        id:req.params.id,
-        name:req.params.name
-    }
-    Controller.upsert(data)
+}
+
+function upsert (req,res){
+    Controller.upsert(req.body)
         .then((doc)=>{
             response.success(req,res,doc,200) 
         }).catch((err)=>{
             response.error(req,res,err.message,500)
         })
+}
+
+router.delete('/:id',function(req,res){
+    
 })
 
 module.exports = router;
