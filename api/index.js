@@ -13,7 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true })) // support encoded bodies
 const swaggerDoc = require('./swagger.json')
 
 const user = require('./components/user/network');
+const auth = require('./components/auth/network');
+
 app.use('/api/user',user)
+app.use('/api/auth',auth)
 app.use('/api-docs',swagerUi.serve, swagerUi.setup(swaggerDoc))
 
 app.listen(config.api.port, () => {
