@@ -1,5 +1,5 @@
 const TABLA = 'user'
-const auth = require('../../auth')
+const auth = require('../../../auth')
 
 module.exports = function (injectedStore){
     let store = injectedStore;
