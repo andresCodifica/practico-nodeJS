@@ -15,10 +15,12 @@ const swaggerDoc = require('./swagger.json')
 const config = require('../config.js')
 const user = require('./components/user/network');
 const auth = require('./components/auth/network');
+const post = require('./components/post/network');
 const errors = require('../network/errors')
 
 app.use('/api/user',user)
 app.use('/api/auth',auth)
+app.use('/api/post',post)
 app.use('/api-docs',swagerUi.serve, swagerUi.setup(swaggerDoc))
 
 app.use(errors)

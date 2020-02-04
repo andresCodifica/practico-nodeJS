@@ -7,8 +7,9 @@ function sign(data){
   return  jwt.sign(data, secret)
 }
 function verify(token){
-  console.log(token)
-  console.log(secret)
+
+  
+
   return jwt.verify(token, secret)
 }
 const check = {
@@ -20,6 +21,9 @@ const check = {
     if(decoded.id !== owner){
       throw error('no puedes hacer esto', 401)
     }
+  },
+  logged: function(req, owner){
+    const decoded = decodeHeader(req)
   }
 }
 function getToken(auth){

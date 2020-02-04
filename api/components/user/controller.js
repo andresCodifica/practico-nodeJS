@@ -5,7 +5,7 @@ const auth = require('../auth')
 module.exports = function (injectedStore){
     let store = injectedStore;
     if(!store){
-        store = require('../../../store/dummy');
+        store = require('../../../store/mysql');
     }
     function list(){
         return store.list(TABLA)
@@ -34,10 +34,17 @@ module.exports = function (injectedStore){
         }
         return store.upsert(TABLA,user)
     }
+    function follow (from, to){
+      return  store.upsert(TABLA+ '_follow',{
+            user_from: from,
+            user_to: to
+        })
+    }
     return {
         list,
         get,
-        upsert
+        upsert,
+        follow
     }
 }
 
