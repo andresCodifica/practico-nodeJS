@@ -1,7 +1,8 @@
-const TABLA = 'user';
+
 const nanoid = require('nanoid')
 const auth = require('../auth')
 
+const TABLA = 'user';
 module.exports = function (injectedStore){
     let store = injectedStore;
     if(!store){
@@ -39,6 +40,12 @@ module.exports = function (injectedStore){
             user_from: from,
             user_to: to
         })
+    }
+    async function following(user){
+        const join = {}
+        join[TABLA] = 'user_to';
+        const query = {user_from: user}
+        return await store.query(TABLA+'_follow', query, join)
     }
     return {
         list,

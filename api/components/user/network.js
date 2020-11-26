@@ -8,6 +8,7 @@ const router = express.Router();
 router.get('/',list)
 router.post('/follow/:id',secure('follow'),follow)
 router.post('/:id/following',secure('follow'),following)
+
 router.get('/:id',get)
 router.post('/',upsert)
 router.put('/',secure('update'),upsert)
@@ -47,6 +48,7 @@ function following(req, res, next){
             return response.success(req,res,data,200)
         }).catch(next)
 }
+
 
 router.delete('/:id',function(req,res){
     
